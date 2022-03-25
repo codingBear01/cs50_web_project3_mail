@@ -1,0 +1,466 @@
+*
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    position: relative;
+    background-color: black;
+    height: 100vh;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+    .overlay 
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.2;
+        z-index: 1;
+    }
+    video 
+    {
+        object-fit: cover;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // min-width: 100%;
+        // min-height: 100%;
+        // width: auto;
+        // height: auto;
+        // z-index: 0;
+        // -ms-transform: translateX(-50%) translateY(-50%);
+        // -moz-transform: translateX(-50%) translateY(-50%);
+        // -webkit-transform: translateX(-50%) translateY(-50%);
+        // transform: translateX(-50%) translateY(-50%);
+    }
+    .container
+    {
+        position: relative;
+        z-index: 2;
+        height: 100vh;
+        display: flex;
+        .login_register, .index
+        {
+            // margin-bottom: 20%;   
+            background: #f3f3f3;
+            text-align: center;
+            border: 4px solid grey;
+            box-shadow: 0 0 10px #fafafa;
+            border-radius: 20px;
+            padding: 20px;
+            width: 500px;
+            margin: 5% auto auto auto;
+            #message
+            {
+                font-weight: bold;
+                color: darkred;
+                margin-bottom: 10px;
+            }
+        }
+        .index
+        {
+            width: 100%;
+            height: 90vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            /* scroll bar */
+            &::-webkit-scrollbar 
+            {
+                width: 0px;
+            }
+            header
+            {
+                nav
+                {
+                    ul
+                    {
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        li
+                        {
+                            list-style: none;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .body
+            {
+                #emails-view
+                {
+                    #main
+                    {
+                        #inbox_table
+                        {
+                            border: 1px solid #e1e1e1;
+                            width:100%;
+                            table-layout:fixed;
+                            tr 
+                            {
+                                position: relative;
+                                border-bottom: 1px solid  #e1e1e1; 
+                                height:2.5em;
+                                cursor: pointer;
+                                td 
+                                {
+                                    
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    .fa-circle
+                                    {
+                                        font-weight: bold;
+                                        color: #007BFF;
+                                    }
+                                }
+                                .archive_bin, .unarchive_bin
+                                {
+                                    position: static;
+                                    font-weight: bold;
+                                    color: #DC3545;
+                                    &:hover
+                                    {
+                                        color:darkred
+                                    }
+                                }
+                                &:hover
+                                {
+                                    background: lightgrey;
+                                }
+                            }
+                            .unread
+                            {
+                                background: white;
+                            }
+                            tbody
+                            {
+                                border-bottom: 1px solid  #e1e1e1;
+                                tr
+                                {
+                                    th:first-child, th:last-child
+                                    {
+                                        width: 50px;
+                                    }
+                                    th:nth-child(2) 
+                                    {
+                                        width: 20%;
+                                    }
+                                    th:nth-child(4) 
+                                    {
+                                        width: 30%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .email-view
+                    {
+                        text-align: left;
+                        span
+                        {
+                            display: flex;
+                            height: 2em;
+                            align-items: baseline;
+                            h4
+                            {
+                                margin: 0;
+                            }
+                            p
+                            {
+                                margin: 0 0 0 5px;
+                                height: inherit;
+                            }
+                            .email-time
+                            {
+                                font-size: 0.7em;
+                            }
+                        }
+                        #icon_span
+                        {
+                            .icon-div
+                            {
+                                margin-left: auto;
+                                margin-right: 5px;
+                                button
+                                {
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                        .email-body
+                        {
+                            border: 1px solid #e1e1e1;
+                            padding: 20px 10px;
+                            height: 40vh;
+                            overflow: scroll;
+                            white-space: pre-wrap;
+                            /* scroll bar */
+                            &::-webkit-scrollbar 
+                            {
+                                width: 0px;
+                            }
+
+                        }
+                    }
+                    .reply-form
+                    {
+                        // Set in js file on line 181 as well
+                        display: none;
+                        form
+                        {
+                            textarea
+                            {
+                                width: 100%;
+                                height: 16vh;
+                                background: #fafafa;
+                                outline: none !important;
+                                border: 1px solid #e1e1e1;
+                                box-shadow: 0 0 10px #e1e1e1;
+                                white-space: pre-wrap;
+
+                                &::-webkit-scrollbar {
+                                    width: 15px;
+                                }
+                                
+                                &::-webkit-scrollbar-track {
+                                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                                }
+                                
+                                &::-webkit-scrollbar-thumb {
+                                  background-color: darkgrey;
+                                  outline: 1px solid slategrey;
+                                }
+                            }
+                            input[type=Submit]
+                            {
+                                width: 100%;
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+
+                }
+                #compose-view
+                {
+                    width: 95%;
+                    margin: auto;
+                    #compose-form
+                    {
+                        text-align: left;
+                        
+                        padding: 10px;
+                        textarea
+                        {
+                            height: 35vh;
+                        }
+                        input[type=submit]
+                        {
+                            margin-top: 15px;
+                            width: 100%;
+                        }
+                    }   
+                }
+                
+            }
+        }
+    }
+}
+
+.alt 
+{
+    position: relative;
+    .alttext 
+    {
+        display: block;
+        overflow: visible;
+        opacity: 0;
+        width: max-content;
+        background-color: #e1e1e1;
+        color: #000000;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 5px 5px;
+        font-size: 0.75em;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 11;
+
+        // Transition
+        transition: opacity 0.1s linear 1s;
+    }
+    &:hover .alttext
+    {
+        opacity: 1;
+    }
+}
+
+// Modern Phones
+@media only screen and (max-width: 460px) 
+{
+    body 
+    {
+        .container
+        {
+            .index
+            {
+                header
+                {
+                    h2
+                    {
+                        font-size: 1.8em;
+                    }
+                    nav
+                    {
+                        ul
+                        {
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                            width: 255px;
+                            margin: auto;
+                            li
+                            {
+                                margin-right: 0;
+                                button,a
+                                {
+                                    width: 100%;
+                                    font-size: 0.8em;
+                                }
+                                &:last-child
+                                {
+                                    margin-top: 10px;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+                .body
+                {
+                    #emails-view
+                    {
+                        #main
+                        {
+                            #inbox_table
+                            {
+                                tbody, tr
+                                {
+                                    // New email light icon
+                                    td:first-child, th:first-child
+                                    {
+                                        display: none;
+                                    }
+                                    // Sender & Receiver
+                                    td:nth-child(2), th:nth-child(2)
+                                    {
+                                        padding-left: 10px;
+                                    }
+                                    // Subject
+                                    td:nth-child(3), th:nth-child(3)
+                                    {
+                                        width: 20%;
+                                    }
+                                    // Body
+                                    td:nth-child(4), th:nth-child(4)
+                                    {
+                                        display:none;
+                                    }
+                                    // Time
+                                    td:nth-child(5), th:nth-child(5)
+                                    {
+                                        width: 13%;
+                                    }
+                                    // Archive logo
+                                    td:nth-child(6), th:nth-child(6)
+                                    {
+                                        width: 25px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+// Small  screen phones
+@media only screen and (max-width: 400px) 
+{
+    body 
+    {
+        .container
+        {
+            .index
+            {
+                padding: 20px 10px;
+                header
+                {
+                    h2
+                    {
+                        font-size: 1.6em;
+                        margin-bottom: 15px;
+                    }
+                }
+                .body
+                {
+                    #compose-view
+                    {
+                        min-width: 0px;
+                        width: 100%;
+                        #compose-form
+                        {
+                            width: inherit;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+// Email look before 500px
+@media only screen and (max-width: 500px) 
+{
+    body
+    {
+        .container
+        {
+            .index
+            {
+                .body
+                {
+                    #emails-view
+                    {
+                        .email-view
+                        {
+                            #icon_span
+                            {
+                                display: flex;
+                                flex-direction: column-reverse;
+                                height: fit-content;
+                                .icon-div
+                                {
+                                    margin: 10px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

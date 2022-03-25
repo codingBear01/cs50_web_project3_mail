@@ -1,7 +1,25 @@
 errors 
-Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'
-
+- Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'
 solutions
-# settings.py
+- # settings.py
 ADD: DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+errors
+- Django won't refresh staticfiles
+solutions
+- refresh press by ctrl + f5 to delete caches and refresh page
+
+errors
+- JSON.stringify(...).then is not a function
+solutions
+- The then should be outside of fetch
+
+errors
+- GET http://127.0.0.1:8000/favicon.ico 404 (Not Found)
+solutions
+- <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+
+
+email['subject'].slice(0, 4) === 'Re: '
+      ? email['subject']
+      : 'Re: ' + email['subject'];

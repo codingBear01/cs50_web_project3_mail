@@ -1,0 +1,194 @@
+textarea {
+  min-height: 400px;
+}
+
+body {
+  background: #0b0c10;
+  padding-top: 3vh;
+}
+
+.form-group {
+  input, input[disabled], input:focus {
+    background-color: #1f2833;
+    color: #c5c6c7;
+  }
+}
+
+#compose-form {
+  textarea {
+    background-color: #1f2833;
+    color: #c5c6c7;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p, label,  {
+  color: #66fcf1;
+}
+
+.form-group {
+  color: #c5c6c7;
+}
+
+#email-submit-button {
+  background-color: #45a29e;
+}
+
+.btn-outline-primary {
+  border-color: #45a29e;
+  color: #66fcf1;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary.selected {
+  background-color: #45a29e;
+  border-color: #45a29e;
+}
+
+#to-text-error-message {
+  color: red;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+#emails-view {
+  .email-line-box:hover {
+    background-color: #45a29e;
+  }
+
+  #titled-first-row {
+    border-top: 1px solid #45a29e;
+    background-color: #0b0c10;
+
+    p {
+      font-weight: inherit;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: #66fcf1;
+    }
+    cursor: default;
+  }
+
+  .email-line-box {
+    border: 1px solid #45a29e;
+    border-top: 0;
+    border-radius: 1px;
+    p {
+      color: #c5c6c7;
+      margin-top: 14px;
+      margin-bottom: 12px;
+    }
+    cursor: pointer;
+  }
+
+
+  .read {
+    background-color: #0b0c10;
+  }
+
+  .unread {
+    background-color: #1f2833;
+    p {
+      font-weight: bolder;
+    }
+  }
+
+}
+
+#single-email-content {
+  background-color: #1f2833;
+  padding-bottom: 40px;
+  .row {
+    p {
+      padding: 0 0 0 30px;
+      margin: 0;
+
+    }
+  }
+  .email-subject-section {
+    #archive-reply-button {
+      padding-top: 30px;
+      button {
+        padding: 5px 30px 5px 30px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        background-color: #1f2833;
+        color: white;
+        border: 1px solid #45a29e;
+        text-align: center;
+      }
+      button:hover {
+        background-color: #45a29e;
+      }
+    }
+  }
+  #email-subject-subsection  {
+    p {
+      font-size:60px;
+    }
+  }
+
+  .email-timestamp-section {
+    p {
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+  }
+  .row.email-sender-section {
+    p:before {
+      content: "From: ";
+    }
+    p {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+  }
+
+  .email-recipients-section {
+    p:before {
+      content: "To: ";
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+  }
+
+  .email-body-section {
+    background-color: #27313b;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    white-space: pre-wrap;
+
+  }
+}
+
+#single-email-back-section {
+  margin-top: 40px;
+  p:before {
+    content: "Back to ";
+  }
+  p:first-letter {
+    text-transform: capitalize;
+  }
+  .row  {
+    margin:0;
+    padding:0;
+    #back-button {
+      background-color: #1f2833;
+      cursor: pointer;
+      p {
+        margin:0;
+        padding: 10px 0;
+        text-align: center;
+      }
+    }
+    #back-button:hover {
+      background-color: #45a29e;
+      p {
+        color: white;
+      }
+    }
+  }
+}
+
+

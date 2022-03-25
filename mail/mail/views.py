@@ -1,8 +1,6 @@
 import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
-# Exception raised when the relational integrity of the database is affected, e.g. a foreign key check fails, duplicate key, etc.
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
@@ -13,6 +11,7 @@ from .models import User, Email
 
 
 def index(request):
+
     # Authenticated users view their inbox
     if request.user.is_authenticated:
         return render(request, "mail/inbox.html")
@@ -25,6 +24,7 @@ def index(request):
 @csrf_exempt
 @login_required
 def compose(request):
+
     # Composing a new email must be via POST
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
@@ -67,7 +67,9 @@ def compose(request):
             email.recipients.add(recipient)
         email.save()
 
-    return JsonResponse({"message": "Email sent successfully."}, status=201)
+    return JsonResponse(
+        {"message": "Email sent successfully.", "status": 201}, status=201
+    )
 
 
 @login_required
@@ -95,6 +97,7 @@ def mailbox(request, mailbox):
 @csrf_exempt
 @login_required
 def email(request, email_id):
+
     # Query for requested email
     try:
         email = Email.objects.get(user=request.user, pk=email_id)
@@ -122,6 +125,7 @@ def email(request, email_id):
 
 def login_view(request):
     if request.method == "POST":
+
         # Attempt to sign user in
         email = request.POST["email"]
         password = request.POST["password"]
@@ -155,29 +159,19 @@ def register(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(
-                request,
-                "mail/register.html",
-                {
-                    "message": "Passwords must match.",
-                    "email": email,
-                    "password": password,
-                },
+                request, "mail/register.html", {"message": "Passwords must match."}
             )
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(email, email, password)
             user.save()
-        except IntegrityError as error:
-            print(error)
+        except IntegrityError as e:
+            print(e)
             return render(
                 request,
                 "mail/register.html",
-                {
-                    "message": "Email address already taken.",
-                    "email": email,
-                    "password": password,
-                },
+                {"message": "Email address already taken."},
             )
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
