@@ -45,7 +45,7 @@ function submit_email(event) {
 }
 
 function compose_email() {
-  document.querySelector('h3').innerHTML = 'New Email';
+  document.querySelector('h4').innerHTML = 'New Email';
 
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
@@ -70,7 +70,6 @@ function load_mailbox(mailbox) {
     mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
   }</h3>`;
 
-  // Show all of the emails in mailbox
   fetch(`/emails/${mailbox}`)
     .then((response) => response.json())
     .then((emails) => {
@@ -79,7 +78,7 @@ function load_mailbox(mailbox) {
 
         item.innerHTML = `
         <div class="email">
-          <div>No.${email.id} From: ${email.sender}|To: ${email.recipients}|Subject: ${email.subject}|${email.timestamp}</div>
+          <div class="one_email">From: ${email.sender} | To: ${email.recipients} | Subject: ${email.subject} | ${email.timestamp}</div>
         </div>
         `;
 
@@ -96,15 +95,13 @@ function load_mailbox(mailbox) {
             show_email(email.id, mailbox);
           });
           email.read
-            ? (item.style.background = 'grey')
+            ? (item.style.background = 'lightgrey')
             : (item.style.background = 'white');
         } else {
           item.addEventListener('click', () => show_email(email.id, mailbox));
         }
       });
     });
-
-  // Read
 }
 
 function show_email(id, mailbox) {
@@ -119,49 +116,46 @@ function show_email(id, mailbox) {
         <div>${email.body}</div>
       </div>
 
-      <div class="button_box">
-        <button class="archive_button">Archive</button>
-        <button class="reply_button">Reply</button>
-      </div>
+        <div class="button_box">
+        </div>
       `;
 
-      const archiveButton = document.querySelector('.archive_button');
       const replyButton = document.querySelector('.reply_button');
 
-      archiveButton.addEventListener('click', () => {
-        fetch(`/emails/${id}`, {
-          method: 'PUT',
-          body: JSON.stringify({
-            archived: !email.archived,
-          }),
+      if (mailbox !== 'sent') {
+        const archiveButton = document.createElement('button');
+        const replyButton = document.createElement('button');
+        document.querySelector('.button_box').appendChild(archiveButton);
+        document.querySelector('.button_box').appendChild(replyButton);
+        replyButton.innerText = 'Reply';
+
+        archiveButton.addEventListener('click', () => {
+          fetch(`/emails/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              archived: !email.archived,
+            }),
+          }).then((response) => load_mailbox('inbox'));
         });
-        archiveButton.innerText === 'Archive'
-          ? (archiveButton.innerText = 'Unarchive')
-          : (archiveButton.innerText = 'Archive');
+
+        archiveButton.innerText = 'Archive';
         if (email.archived) {
           archiveButton.innerText = 'Unarchive';
         } else {
           archiveButton.innerText = 'Archive';
         }
-        console.log(email.archived);
-      });
 
-      replyButton.addEventListener('click', () => {
-        reply_email(
-          email.sender,
-          email.subject,
-          email.body,
-          email.id,
-          email.timestamp
-        );
-      });
+        replyButton.addEventListener('click', () => {
+          reply_email(email.sender, email.subject, email.body, email.timestamp);
+        });
+      }
     });
 }
 
-function reply_email(from, subject, body, id, time) {
+function reply_email(from, subject, body, time) {
   compose_email();
 
-  document.querySelector('h3').innerHTML = 'Reply Email';
+  document.querySelector('h4').innerHTML = 'Reply Email';
   document.querySelector('#compose-recipients').value = from;
   document.querySelector('#compose-subject').value =
     subject.slice(0, 4) === 'Re: ' ? subject : `Re: ${subject}`;

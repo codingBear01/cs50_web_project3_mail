@@ -1,3 +1,35 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  padding: 15px;
+  margin: 0px;
+}
+
 textarea {
-    min-height: 400px;
+  min-height: 400px;
+}
+
+.main_wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.main_container {
+  padding: 20px;
+  width: 70%;
+}
+
+.side_bar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 30%;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.email {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.one_email {
+  margin-bottom: 10px;
 }
